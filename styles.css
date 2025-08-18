@@ -12,36 +12,36 @@ body {
     sans-serif;
   background: #f8f9fa;
   color: #1a1a1a;
-  width: 600px;
-  min-height: 700px;
+  width: 650px;
+  min-height: 750px;
   overflow-x: hidden;
 }
 
 .container {
   background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.18);
   overflow: hidden;
 }
 
 /* Header */
 header {
   background: linear-gradient(135deg, #9945ff 0%, #14f195 100%);
-  padding: 36px 40px 32px;
+  padding: 42px 48px 38px;
   text-align: center;
   position: relative;
 }
 
 header h1 {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   letter-spacing: -0.02em;
 }
 
 header p {
-  font-size: 17px;
+  font-size: 18px;
   color: rgba(255, 255, 255, 0.9);
   font-weight: 400;
   line-height: 1.5;
@@ -49,31 +49,31 @@ header p {
 
 /* Input Section */
 .input-section {
-  padding: 36px 40px;
+  padding: 42px 48px;
   background: #ffffff;
   border-bottom: 1px solid #f0f0f0;
 }
 
 .input-group {
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .input-group label {
   display: block;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: #6b7280;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 #walletAddress {
   width: 100%;
-  padding: 18px 24px;
+  padding: 22px 28px;
   border: 2px solid #e5e7eb;
-  border-radius: 14px;
-  font-size: 17px;
+  border-radius: 16px;
+  font-size: 18px;
   font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
   background: #ffffff;
   color: #1a1a1a;
@@ -93,12 +93,12 @@ header p {
 
 #scanButton {
   width: 100%;
-  padding: 20px 32px;
+  padding: 24px 36px;
   background: linear-gradient(135deg, #9945ff 0%, #14f195 100%);
   color: #ffffff;
   border: none;
-  border-radius: 14px;
-  font-size: 17px;
+  border-radius: 16px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -108,7 +108,7 @@ header p {
 
 #scanButton:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(153, 69, 255, 0.3);
+  box-shadow: 0 10px 24px rgba(153, 69, 255, 0.3);
 }
 
 #scanButton:active {
@@ -124,24 +124,24 @@ header p {
 
 /* Error Message */
 .error-message {
-  margin: 0 40px 28px;
-  padding: 18px 24px;
+  margin: 0 48px 32px;
+  padding: 22px 28px;
   background: #fef2f2;
   border: 1px solid #fecaca;
-  border-radius: 14px;
+  border-radius: 16px;
   color: #dc2626;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .error-message::before {
   content: "⚠";
-  font-size: 20px;
+  font-size: 22px;
 }
 
 /* Loading Spinner */
@@ -150,18 +150,18 @@ header p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 70px 40px;
+  padding: 80px 48px;
   text-align: center;
 }
 
 .spinner {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border: 4px solid #f3f4f6;
   border-top: 4px solid #9945ff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 @keyframes spin {
@@ -175,7 +175,7 @@ header p {
 
 .loading-spinner p {
   color: #6b7280;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -197,7 +197,7 @@ header p {
 }
 
 .results-header {
-  padding: 32px 40px 28px;
+  padding: 38px 48px 32px;
   border-bottom: 1px solid #f0f0f0;
   display: flex;
   justify-content: space-between;
@@ -205,23 +205,23 @@ header p {
 }
 
 .results-header h2 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   color: #1a1a1a;
 }
 
 .token-count {
-  font-size: 15px;
+  font-size: 16px;
   color: #6b7280;
   background: #f8f9fa;
-  padding: 10px 18px;
-  border-radius: 18px;
+  padding: 12px 20px;
+  border-radius: 20px;
   font-weight: 500;
 }
 
 /* Token Sections */
 .tokens-section {
-  padding: 28px 40px;
+  padding: 32px 48px;
 }
 
 .tokens-section:not(:last-child) {
@@ -229,19 +229,19 @@ header p {
 }
 
 .tokens-section h3 {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .tokens-section h3::before {
   content: "";
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -258,16 +258,16 @@ header p {
 .tokens-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .token-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 28px;
+  padding: 28px 32px;
   background: #f8f9fa;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid #f0f0f0;
   transition: all 0.2s ease;
 }
@@ -279,60 +279,60 @@ header p {
 
 .token-info {
   flex: 1;
-  margin-right: 24px;
+  margin-right: 28px;
 }
 
 .token-name {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   line-height: 1.4;
 }
 
 .token-symbol {
-  font-size: 15px;
+  font-size: 16px;
   color: #6b7280;
   font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
   font-weight: 500;
   background: #e5e7eb;
-  padding: 5px 12px;
-  border-radius: 10px;
+  padding: 6px 14px;
+  border-radius: 12px;
   display: inline-block;
 }
 
 .token-balance {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: #1a1a1a;
   font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
   text-align: right;
-  min-width: 120px;
+  min-width: 140px;
 }
 
 /* Empty State */
 .empty-state {
   text-align: center;
-  padding: 70px 40px;
+  padding: 80px 48px;
   color: #6b7280;
 }
 
 .empty-state p {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 500;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .empty-state::before {
   content: "";
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236b7280'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   display: block;
-  margin: 0 auto 18px;
+  margin: 0 auto 20px;
   opacity: 0.6;
 }
 
@@ -343,7 +343,7 @@ header p {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
@@ -352,7 +352,7 @@ header p {
 
 ::-webkit-scrollbar-thumb {
   background: #c1c1c1;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -360,7 +360,7 @@ header p {
 }
 
 /* Responsive */
-@media (max-width: 700px) {
+@media (max-width: 750px) {
   body {
     width: 100%;
   }
