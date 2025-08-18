@@ -1,0 +1,26 @@
+{
+  "name": "solana-wallet-scanner",
+  "version": "1.0.0",
+  "description": "A browser extension to scan Solana wallet addresses and view all tokens",
+  "main": "popup.js",
+  "scripts": {
+    "build": "echo 'Extension is ready to use'",
+    "test": "echo 'No tests specified'",
+    "package": "zip -r solana-wallet-scanner.zip . -x '*.git*' 'node_modules/*' '*.md' 'package.json' 'package-lock.json'"
+  },
+  "author": "13b",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/solana-wallet-scanner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/solana-wallet-scanner/issues"
+  },
+  "homepage": "https://github.com/yourusername/solana-wallet-scanner#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solana Wallet Scanner</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Solana Wallet Scanner</h1>
+        <p>Scan any Solana wallet for tokens and NFTs</p>
+      </header>
+
+      <div class="input-section">
+        <div class="input-group">
+          <label for="walletAddress">Wallet Address</label>
+          <input
+            type="text"
+            id="walletAddress"
+            placeholder="Enter Solana wallet address (32-44 chars)..."
+            maxlength="44"
+          />
+        </div>
+        <button id="scanButton">Scan Wallet</button>
+      </div>
+
+      <div id="errorMessage" class="error-message hidden"></div>
+
+      <div id="loadingSpinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>Scanning wallet...</p>
+      </div>
+
+      <div id="results" class="results hidden">
+        <div class="results-header">
+          <h2>Wallet Contents</h2>
+          <div class="token-count"><span id="tokenCount">0</span> tokens</div>
+        </div>
+
+        <div class="tokens-section">
+          <h3>Fungible Tokens</h3>
+          <div id="fungibleTokens" class="tokens-list"></div>
+        </div>
+
+        <div class="tokens-section">
+          <h3>NFTs</h3>
+          <div id="nftTokens" class="tokens-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg48" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="icon48" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow48">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Background with gradient -->
+  <rect width="48" height="48" rx="9.600000000000001" fill="url(#bg48)"/>
+  
+  <!-- Main icon -->
+  <g transform="translate(9.600000000000001, 9.600000000000001) scale(1.7999999999999998)" filter="url(#shadow48)">
+    <!-- Wallet icon -->
+    <rect x="2" y="4" width="12" height="8" rx="2" fill="url(#icon48)" opacity="0.9"/>
+    <rect x="4" y="6" width="8" height="4" rx="1" fill="url(#icon48)" opacity="0.7"/>
+    
+    <!-- Search magnifying glass -->
+    <circle cx="11" cy="11" r="3" fill="none" stroke="url(#icon48)" stroke-width="1.5" opacity="0.8"/>
+    <line x1="13" y1="13" x2="15" y2="15" stroke="url(#icon48)" stroke-width="1.5" opacity="0.8"/>
+    
+    <!-- Sparkle effect -->
+    <circle cx="4" cy="4" r="0.5" fill="url(#icon48)" opacity="0.6"/>
+    <circle cx="12" cy="3" r="0.3" fill="url(#icon48)" opacity="0.4"/>
+    <circle cx="14" cy="6" r="0.4" fill="url(#icon48)" opacity="0.5"/>
+  </g>
+</svg>
