@@ -7,6 +7,9 @@ A professional Chrome extension to scan Solana wallet addresses and view all tok
 - Clean, professional interface
 - Real-time Solana wallet scanning
 - View fungible tokens and NFTs
+- **Recent transactions history (last 10)**
+- **Transaction details with timestamps**
+- **Click to view transactions on Solscan**
 - Responsive design
 - Fast and reliable
 
@@ -24,7 +27,8 @@ A professional Chrome extension to scan Solana wallet addresses and view all tok
 1. Click the extension icon
 2. Enter a Solana wallet address (44 characters)
 3. Click "Scan Wallet"
-4. View tokens and NFTs
+4. View tokens, NFTs, and recent transactions
+5. Click on any transaction to view details on Solscan
 
 ## Technical Details
 

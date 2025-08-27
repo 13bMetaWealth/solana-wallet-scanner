@@ -20,6 +20,8 @@ class SolanaWalletScanner {
     this.tokenCount = document.getElementById("tokenCount");
     this.fungibleTokens = document.getElementById("fungibleTokens");
     this.nftTokens = document.getElementById("nftTokens");
+    this.recentTransactions = document.getElementById("recentTransactions");
+    this.transactionsHeader = document.getElementById("transactionsHeader");
   }
 
   bindEvents() {
@@ -41,6 +43,11 @@ class SolanaWalletScanner {
 
     // Focus on input when popup opens
     this.walletInput.focus();
+
+    // Add click handler for transactions header
+    this.transactionsHeader.addEventListener("click", () => {
+      this.toggleTransactionsSection();
+    });
   }
 
   validateWalletAddress(address) {
@@ -109,8 +116,11 @@ class SolanaWalletScanner {
     this.showLoading();
 
     try {
-      const tokens = await this.fetchWalletTokens(address);
-      this.displayResults(tokens);
+      const [tokens, transactions] = await Promise.all([
+        this.fetchWalletTokens(address),
+        this.fetchRecentTransactions(address),
+      ]);
+      this.displayResults(tokens, transactions);
     } catch (error) {
       console.error("Error scanning wallet:", error);
       this.showError(this.getErrorMessage(error));
@@ -170,6 +180,83 @@ class SolanaWalletScanner {
     }
 
     return null;
+  }
+
+  async fetchRecentTransactions(address) {
+    try {
+      const url = `${this.heliusEndpoint}/addresses/${address}/transactions?api-key=${this.heliusApiKey}`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        console.warn("Failed to fetch transactions:", response.status);
+        return [];
+      }
+
+      const data = await response.json();
+      return this.processTransactionData(data);
+    } catch (error) {
+      console.warn("Error fetching transactions:", error);
+      return [];
+    }
+  }
+
+  processTransactionData(data) {
+    if (!data || !Array.isArray(data)) {
+      return [];
+    }
+
+    // Take only the last 10 transactions
+    const recentTransactions = data.slice(0, 10);
+
+    return recentTransactions.map((tx) => {
+      const timestamp = tx.timestamp
+        ? new Date(tx.timestamp * 1000)
+        : new Date();
+      const signature =
+        tx.signature || tx.transaction?.signatures?.[0] || "Unknown";
+
+      // Determine transaction type and amount
+      let type = "Transfer";
+      let amount = "0";
+      let token = "SOL";
+
+      // Check for token transfers
+      if (tx.tokenTransfers && tx.tokenTransfers.length > 0) {
+        const transfer = tx.tokenTransfers[0];
+        type = "Token Transfer";
+        amount = this.formatBalance(transfer.amount, transfer.decimals || 0);
+        token = transfer.mint || "Unknown Token";
+      }
+      // Check for SOL transfers
+      else if (tx.nativeTransfers && tx.nativeTransfers.length > 0) {
+        const transfer = tx.nativeTransfers[0];
+        type = "SOL Transfer";
+        amount = (transfer.amount / 1e9).toFixed(9); // Convert lamports to SOL
+        token = "SOL";
+      }
+      // Check for NFT transfers
+      else if (tx.nftTransfers && tx.nftTransfers.length > 0) {
+        type = "NFT Transfer";
+        amount = "1";
+        token = "NFT";
+      }
+
+      return {
+        signature: signature,
+        type: type,
+        amount: amount,
+        token: token,
+        timestamp: timestamp,
+        status: tx.meta?.err ? "Failed" : "Success",
+        fee: tx.meta?.fee ? (tx.meta.fee / 1e9).toFixed(9) : "0",
+      };
+    });
   }
 
   async processTokenData(data) {
@@ -295,7 +382,7 @@ class SolanaWalletScanner {
     }
   }
 
-  displayResults(tokens) {
+  displayResults(tokens, transactions) {
     this.hideLoading();
 
     const totalTokens = tokens.fungible.length + tokens.nfts.length;
@@ -303,6 +390,7 @@ class SolanaWalletScanner {
 
     this.displayFungibleTokens(tokens.fungible);
     this.displayNFTs(tokens.nfts);
+    this.displayRecentTransactions(transactions);
 
     this.showResults();
   }
@@ -354,6 +442,101 @@ class SolanaWalletScanner {
       <div class="token-balance">${token.balance}</div>
     `;
     return element;
+  }
+
+  displayRecentTransactions(transactions) {
+    this.recentTransactions.innerHTML = "";
+
+    if (transactions.length === 0) {
+      this.recentTransactions.innerHTML = `
+        <div class="empty-state">
+          <p>No recent transactions found</p>
+        </div>
+      `;
+      return;
+    }
+
+    transactions.forEach((tx) => {
+      const txElement = this.createTransactionElement(tx);
+      this.recentTransactions.appendChild(txElement);
+    });
+
+    // Show transaction count in header
+    const transactionCount = transactions.length;
+    const headerText =
+      this.transactionsHeader.querySelector("span:first-child");
+    headerText.textContent = `Recent Transactions (${transactionCount})`;
+  }
+
+  createTransactionElement(tx) {
+    const element = document.createElement("div");
+    element.className = "transaction-item";
+
+    const statusClass = tx.status === "Success" ? "success" : "failed";
+    const formattedTime = this.formatTimestamp(tx.timestamp);
+
+    element.innerHTML = `
+      <div class="transaction-info">
+        <div class="transaction-type">${this.escapeHtml(tx.type)}</div>
+        <div class="transaction-details">
+          <span class="transaction-amount">${tx.amount} ${this.escapeHtml(
+      tx.token
+    )}</span>
+          <span class="transaction-fee">Fee: ${tx.fee} SOL</span>
+        </div>
+        <div class="transaction-time">${formattedTime}</div>
+      </div>
+      <div class="transaction-status ${statusClass}">
+        <span class="status-text">${tx.status}</span>
+      </div>
+    `;
+
+    // Add click handler to view transaction on Solscan
+    element.addEventListener("click", () => {
+      this.openTransactionOnSolscan(tx.signature);
+    });
+
+    return element;
+  }
+
+  formatTimestamp(timestamp) {
+    const now = new Date();
+    const diff = now - timestamp;
+    const minutes = Math.floor(diff / (1000 * 60));
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    if (minutes < 1) {
+      return "Just now";
+    } else if (minutes < 60) {
+      return `${minutes}m ago`;
+    } else if (hours < 24) {
+      return `${hours}h ago`;
+    } else if (days < 7) {
+      return `${days}d ago`;
+    } else {
+      return timestamp.toLocaleDateString();
+    }
+  }
+
+  openTransactionOnSolscan(signature) {
+    if (signature && signature !== "Unknown") {
+      const url = `https://solscan.io/tx/${signature}`;
+      chrome.tabs.create({ url: url });
+    }
+  }
+
+  toggleTransactionsSection() {
+    const isCollapsed = this.recentTransactions.classList.contains("collapsed");
+    const expandIcon = this.transactionsHeader.querySelector(".expand-icon");
+
+    if (isCollapsed) {
+      this.recentTransactions.classList.remove("collapsed");
+      expandIcon.textContent = "▲";
+    } else {
+      this.recentTransactions.classList.add("collapsed");
+      expandIcon.textContent = "▼";
+    }
   }
 
   escapeHtml(text) {

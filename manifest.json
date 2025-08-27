@@ -3,7 +3,7 @@
   "name": "Solana Wallet Scanner",
   "version": "1.0.0",
   "description": "Professional Solana wallet scanner with clean interface",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "tabs"],
   "host_permissions": ["https://api.helius.xyz/*"],
   "action": {
     "default_popup": "popup.html",
